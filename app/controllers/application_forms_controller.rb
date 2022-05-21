@@ -32,6 +32,11 @@ class ApplicationFormsController < ApplicationController
     # end
   end
 
+  def add_pet
+    ApplicationPet.create(application_form_id: params[:id], pet_id: params[:pet_id])
+    redirect_to "/application_forms/#{params[:id]}/"
+  end
+
   private
     def application_form_params
       params.permit(:name, :street_address, :city, :state, :zip_code)
