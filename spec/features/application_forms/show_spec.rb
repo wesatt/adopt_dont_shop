@@ -79,4 +79,32 @@ RSpec.describe ApplicationForm, type: :feature do
       expect(page).to have_content("Lobster")
     end
   end
+
+  describe "Add a Pet to an Application" do
+    # As a visitor
+    # When I visit an application's show page
+    # And I search for a Pet by name
+    # And I see the names Pets that match my search
+    # Then next to each Pet's name I see a button to "Adopt this Pet"
+    # When I click one of these buttons
+    # Then I am taken back to the application show page
+    # And I see the Pet I want to adopt listed on this application
+    it "can add a pet to an application" do
+      visit "/application_forms/#{applicationform_1.id}/"
+      fill_in(:query, with: 'Lobster')
+      click_button('Submit Search')
+
+      within "#current-pets" do
+        expect(page).to_not have_content("Lobster")
+      end
+
+      click_button "Adopt Lobster"
+
+      expect(current_path).to eq("/application_forms/#{applicationform_1.id}/")
+
+      within "#current-pets" do
+        expect(page).to have_content("Lobster")
+      end
+    end
+  end
 end

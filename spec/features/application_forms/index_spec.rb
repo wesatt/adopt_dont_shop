@@ -20,7 +20,7 @@ RSpec.describe 'the application form index' do
 
     visit "/application_forms"
     #
-    save_and_open_page
+    # save_and_open_page
     #
     # expect(page).to have_content(pet_1.name)
     # expect(page).to have_content(pet_1.breed)

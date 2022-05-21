@@ -10,9 +10,11 @@
 <br>
 
 <h3>Current pets:</h3>
-  <% @application_form.pets.each do |pet|%>
-    <p><strong><%= link_to "#{pet.name}", "/pets/#{pet.id}/" %></strong></p>
-  <% end %>
+  <div id="current-pets">
+    <% @application_form.pets.each do |pet|%>
+      <p><strong><%= link_to "#{pet.name}", "/pets/#{pet.id}/" %></strong></p>
+    <% end %>
+  </div>
   <br>
 
 <% if @application_form.status == "In Progress" %>
