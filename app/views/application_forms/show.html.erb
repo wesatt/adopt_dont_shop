@@ -35,7 +35,7 @@
 <% end %>
 
 <% if params[:query] %>
-  <% Pet.search_results(params[:query]).each do |pet| %>
+  <% Pet.search(params[:query]).each do |pet| %>
     <p><strong><%= pet.name %></strong> <%= button_to "Adopt #{pet.name}", { controller: :application_forms, action: :add_pet, pet_id: pet.id }, method: :post %></p>
   <% end %>
 <% end %>
