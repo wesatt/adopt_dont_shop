@@ -12,4 +12,8 @@ class Pet < ApplicationRecord
   def self.adoptable
     where(adoptable: true)
   end
+
+  def self.search_results(params_query)
+    Pet.where("name ILIKE ?", "%#{params_query}%")
+  end
 end
