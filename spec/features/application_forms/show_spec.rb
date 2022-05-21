@@ -12,6 +12,7 @@ RSpec.describe ApplicationForm, type: :feature do
   let!(:applicationform_2) { ApplicationForm.create(name: "Levi", street_address: "4321 Another Street", city: "Los Angeles", state: "CA", zip_code: "12345", description: "wanna animal", status: "Pending") }
   let!(:applicationform_3) { ApplicationForm.create(name: "Diana", street_address: "4444 Oneother Court", city: "Detroit", state: "MI", zip_code: "54321", description: "I love animals", status: "Accepted") }
   let!(:applicationform_4) { ApplicationForm.create(name: "Michael", street_address: "621311 Thisdude Street", city: "Philadelphia", state: "PA", zip_code: "19147", description: "Definitely NOT for fighting", status: "Rejected") }
+  let!(:applicationform_5) { ApplicationForm.create(name: "Rutger", street_address: "5555 This Street", city: "Denver", state: "CO", zip_code: "80012", status: "In Progress") }
 
   let!(:application_pets_1) { ApplicationPet.create(pet: pet_1, application_form: applicationform_1) }
   let!(:application_pets_2) { ApplicationPet.create(pet: pet_3, application_form: applicationform_2) }
@@ -105,6 +106,47 @@ RSpec.describe ApplicationForm, type: :feature do
       within "#current-pets" do
         expect(page).to have_content("Lobster")
       end
+    end
+  end
+
+  describe "Submit an Application" do
+    # As a visitor
+    # When I visit an application's show page
+    # And I have added one or more pets to the application
+    # Then I see a section to submit my application
+    # And in that section I see an input to enter why I would make a good owner for these pet(s)
+    # When I fill in that input
+    # And I click a button to submit this application
+    # Then I am taken back to the application's show page
+    # And I see an indicator that the application is "Pending"
+    # And I see all the pets that I want to adopt
+    # And I do not see a section to add more pets to this application
+    it "can submit an application if there is an animal added and a description" do
+      visit "/application_forms/#{applicationform_5.id}/"
+
+      expect(page).to_not have_content("Why would you be a good owner for your selected pet(s)?")
+      within "#current-pets" do
+        expect(page).to_not have_content("Lobster")
+      end
+
+      fill_in(:query, with: "Lobster")
+      click_button("Submit Search")
+      click_button("Adopt Lobster")
+
+      expect(page).to have_content("Application Status: In Progress")
+      expect(page).to have_content("Why would you be a good owner for your selected pet(s)?")
+      expect(page).to have_content("Add a Pet to this Application")
+
+      fill_in(:description, with: "I'm gonna love this animal with all my heart!")
+      click_button("Submit Application")
+
+      expect(current_path).to eq("/application_forms/#{applicationform_5.id}/")
+      within "#current-pets" do
+        expect(page).to have_content("Lobster")
+      end
+      expect(page).to have_content("Application Status: Pending")
+      expect(page).to_not have_content("Why would you be a good owner for your selected pet(s)?")
+      expect(page).to_not have_content("Add a Pet to this Application")
     end
   end
 end
