@@ -32,6 +32,13 @@ RSpec.describe Pet, type: :model do
         expect(Pet.adoptable).to eq([@pet_1, @pet_2])
       end
     end
+
+    describe "#search_results(params[:query])" do
+      it "returns pets based on query input and pet name" do
+        expect(Pet.search_results("Ann")).to eq([@pet_3])
+        expect(Pet.search_results("I")).to eq([@pet_1, @pet_2])
+      end
+    end
   end
 
   describe 'instance methods' do

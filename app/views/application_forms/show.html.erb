@@ -1,12 +1,31 @@
-<h1><%= @application_form.name %></h1>
-<h3><%= @application_form.street_address %></h3>
-<h3><%= @application_form.city %></h3>
-<h3><%= @application_form.state %></h3>
-<h3><%= @application_form.zip_code %></h3>
-<h3>Description: <%= @application_form.description %></h3>
-<h3>Status: <%= @application_form.status %></h3>
-<h3><% @application_form.pets.each do |pet|%>
-    <%= link_to "#{pet.name}", "/pets/#{pet.id}/" %>
-  <% end %>
 
-</h3>
+<h1>Application for:</h1>
+<h2><%= @application_form.name %></h2>
+<p><strong>Address:</strong> <%= @application_form.street_address %></p>
+<p><strong>City:</strong> <%= @application_form.city %></p>
+<p><strong>State:</strong> <%= @application_form.state %></p>
+<p><strong>Zip:</strong> <%= @application_form.zip_code %></p>
+<p><strong>Description:</strong> <%= @application_form.description %></p>
+<p><strong>Application Status:</strong> <%= @application_form.status %></p>
+<br>
+
+<h3>Current pets:</h3>
+  <% @application_form.pets.each do |pet|%>
+    <p><strong><%= link_to "#{pet.name}", "/pets/#{pet.id}/" %></strong></p>
+  <% end %>
+  <br>
+
+<% if @application_form.status == "In Progress" %>
+  <h3>Add a Pet to this Application</h3>
+  <%= form_with url: "/application_forms/#{@application_form.id}/", method: :get do |form| %>
+    <%= form.label :query, "Search pets by name:" %>
+    <%= form.text_field :query %>
+    <%= form.submit "Submit Search" %>
+  <% end %>
+<% end %>
+
+<% if params[:query] != nil %>
+  <% Pet.search_results(params[:query]).each do |pet| %>
+    <p><%= pet.name %></p>
+  <% end %>
+<% end %>
