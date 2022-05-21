@@ -18,14 +18,19 @@ shelter_2 = Shelter.create(name: 'Mystery Building', city: 'Irvine CA', foster_p
 pet_1 = Pet.create(name: 'Scooby', age: 2, breed: 'Great Dane', adoptable: true, shelter_id: shelter_1.id)
 pet_2 = Pet.create(adoptable: true, age: 1, breed: 'sphynx', name: 'Lucille Bald', shelter_id: shelter_1.id)
 pet_3 = Pet.create(adoptable: true, age: 3, breed: 'doberman', name: 'Lobster', shelter_id: shelter_2.id)
+pet_4 = Pet.create(adoptable: true, age: 5, breed: 'browndog', name: 'Gravy', shelter_id: shelter_2.id)
+pet_5 = Pet.create(adoptable: true, age: 7, breed: 'pitty', name: 'David the Dog', shelter_id: shelter_2.id)
 
-applicationform_1 = ApplicationForm.create(name: "Hank", street_address: "1234 Some Street", city: "Aurora", state: "CO", zip_code: "80015", description: "I'd like an animal please", status: "In Progress")
-applicationform_2 = ApplicationForm.create(name: "Levi", street_address: "4321 Another Street", city: "Los Angeles", state: "CA", zip_code: "12345", description: "wanna animal", status: "Pending")
-applicationform_3 = ApplicationForm.create(name: "Diana", street_address: "4444 Oneother Court", city: "Detroit", state: "MI", zip_code: "54321", description: "I love animals", status: "Accepted")
+applicationform_1 = ApplicationForm.create(name: "Hank", street_address: "1234 Some Street", city: "Aurora", state: "CO", zip_code: "80015", status: "In Progress")
+applicationform_2 = ApplicationForm.create(name: "Levi", street_address: "4321 Another Street", city: "Los Angeles", state: "CA", zip_code: "12345", description: "I would like an animal, please.", status: "Pending")
+applicationform_3 = ApplicationForm.create(name: "Diana", street_address: "4444 Oneother Court", city: "Detroit", state: "MI", zip_code: "54321", description: "I love animals.", status: "Accepted")
 applicationform_4 = ApplicationForm.create(name: "Michael", street_address: "621311 Thisdude Street", city: "Philadelphia", state: "PA", zip_code: "19147", description: "Definitely NOT for fighting", status: "Rejected")
+applicationform_5 = ApplicationForm.create(name: "Rutger", street_address: "5555 This Street", city: "Denver", state: "CO", zip_code: "80012", status: "In Progress")
 
 application_pets_1 = ApplicationPet.create(pet: pet_1, application_form: applicationform_1)
-application_pets_2 = ApplicationPet.create(pet: pet_3, application_form: applicationform_2)
+application_pets_2 = ApplicationPet.create(pet: pet_2, application_form: applicationform_2)
+application_pets_3 = ApplicationPet.create(pet: pet_3, application_form: applicationform_3)
+application_pets_4 = ApplicationPet.create(pet: pet_4, application_form: applicationform_4)
 
 vet_office_1 = VeterinaryOffice.create(name: 'Special Friends', boarding_services: true, max_patient_capacity: 100)
 vet_office_2 = VeterinaryOffice.create(name: 'Pet Emergency Room', boarding_services: false, max_patient_capacity: 50)

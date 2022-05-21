@@ -145,6 +145,7 @@ RSpec.describe ApplicationForm, type: :feature do
         expect(page).to have_content("Lobster")
       end
       expect(page).to have_content("Application Status: Pending")
+      expect(page).to have_content("I'm gonna love this animal with all my heart!")
       expect(page).to_not have_content("Why would you be a good owner for your selected pet(s)?")
       expect(page).to_not have_content("Add a Pet to this Application")
     end

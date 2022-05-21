@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get '/application_forms/new', to: 'application_forms#new'
   get '/application_forms/:id', to: 'application_forms#show'
   post '/application_forms/:id', to: 'application_forms#add_pet'
+  patch '/application_forms/:id', to: 'application_forms#update'
 
   get '/veterinary_offices', to: 'veterinary_offices#index'
   get '/veterinary_offices/new', to: 'veterinary_offices#new'
