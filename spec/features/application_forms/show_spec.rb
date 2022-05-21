@@ -72,12 +72,8 @@ RSpec.describe ApplicationForm, type: :feature do
       expect(page).to have_content("Add a Pet to this Application")
       expect(page).to_not have_content("Lobster")
 
-      save_and_open_page
-
       fill_in(:query, with: 'Lobster')
-      click_button('Search for Pet')
-
-      save_and_open_page
+      click_button('Submit Search')
 
       expect(current_path).to eq("/application_forms/#{applicationform_1.id}/")
       expect(page).to have_content("Lobster")
