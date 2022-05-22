@@ -19,6 +19,19 @@ RSpec.describe 'the application form index' do
     application_pets_3 = ApplicationPet.create(pet: pet_1, application_form: applicationform_2)
 
     visit "/application_forms"
-      #incomplete test, will need to come back to this
+
+    #incomplete test, will need to come back to this
+    #
+    # save_and_open_page
+    #
+    # expect(page).to have_content(pet_1.name)
+    # expect(page).to have_content(pet_1.breed)
+    # expect(page).to have_content(pet_1.age)
+    # expect(page).to have_content(shelter.name)
+    #
+    # expect(page).to have_content(pet_2.name)
+    # expect(page).to have_content(pet_2.breed)
+    # expect(page).to have_content(pet_2.age)
+    # expect(page).to have_content(shelter.name)
   end
 end
