@@ -53,9 +53,9 @@ RSpec.describe 'the admins shelter index' do
     applicationform_3 = ApplicationForm.create(name: "Diana", street_address: "4444 Oneother Court", city: "Detroit", state: "MI", zip_code: "54321", description: "I love animals", status: "Accepted")
     applicationform_4 = ApplicationForm.create(name: "Michael", street_address: "621311 Thisdude Street", city: "Philadelphia", state: "PA", zip_code: "19147", description: "Definitely NOT for fighting", status: "Rejected")
 
-    application_pets_1 = ApplicationPet.create(pet: pet_1, application_form: applicationform_1)
+    application_pets_1 = ApplicationPet.create(pet: pet_1, application_form: applicationform_2)
     application_pets_2 = ApplicationPet.create(pet: pet_3, application_form: applicationform_2)
-    application_pets_3 = ApplicationPet.create(pet: pet_1, application_form: applicationform_2)
+    application_pets_3 = ApplicationPet.create(pet: pet_2, application_form: applicationform_1)
 
     visit "/admin/shelters"
     # save_and_open_page
@@ -64,13 +64,13 @@ RSpec.describe 'the admins shelter index' do
     expect(page).to have_content("#{shelter_1.name} has pending applications")
     expect(page).to have_content("#{shelter_2.name} has pending applications")
     expect(page).to_not have_content("#{shelter_3.name} has pending applications")
-    # expect("Shelters with Pending Applications:").to appear_before(shelter_2.name)
-    # expect("Shelters with Pending Applications:").to appear_before(shelter_2.name)
-    # expect("Shelters with Pending Applications:").to_not appear_before(shelter_2.name)
-    # expect(shelter_2.name).to appear_after("Shetlers with Pending Applications:")
-    # expect(shelter_3.name).to appear_after!("Shetlers with Pending Applications:")
-    # expect("Admin Page: All Shelters").to appear_before("Shelters with Pending Applications:")
-    # expect("Shelters with Pending Applications:").to appear_before(shelter_2.name)
+
+
+    pet_4 = Pet.create(adoptable: true, age: 3, breed: 'doberman', name: 'Melvin', shelter_id: shelter_3.id)
+    application_pets_4 = ApplicationPet.create(pet: pet_4, application_form: applicationform_2)
+
+    visit "/admin/shelters"
+    expect(page).to have_content("#{shelter_3.name} has pending applications")
 
   end
 end
