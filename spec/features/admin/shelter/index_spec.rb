@@ -26,9 +26,9 @@ RSpec.describe 'the admins shelter index' do
     # application_pets_3 = ApplicationPet.create(pet: pet_1, application_form: applicationform_2)
 
     visit "/admin/shelters"
-
-    expect(shelter_3).to appear_before(shelter_2)
-    expect(shelter_2).to appear_before(shelter_1)
+    # save_and_open_page
+    expect(shelter_3.name).to appear_before(shelter_2.name)
+    expect(shelter_2.name).to appear_before(shelter_1.name)
 
   end
 end
