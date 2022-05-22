@@ -49,7 +49,7 @@ RSpec.describe "view admin_application_forms/show.html.erb", type: :feature do
       end
 
       expect(current_path).to eq("/admin/application_forms/#{applicationform_1.id}")
-
+      
       within "#pet-#{pet_1.id}" do
         expect(page).to have_button("Approve This Pet For This Application")
         expect(page).to_not have_content("APPROVED")
