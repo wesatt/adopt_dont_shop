@@ -9,8 +9,8 @@ ApplicationPet.destroy_all
 Pet.destroy_all
 Shelter.destroy_all
 ApplicationForm.destroy_all
-VeterinaryOffice.destroy_all
 Veterinarian.destroy_all
+VeterinaryOffice.destroy_all
 
 shelter_1 = Shelter.create(name: 'Aurora Shelter', city: 'Aurora, CO', foster_program: true, rank: 9)
 shelter_2 = Shelter.create(name: 'Mystery Building', city: 'Irvine CA', foster_program: false, rank: 5)

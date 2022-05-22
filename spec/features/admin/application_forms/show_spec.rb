@@ -34,7 +34,7 @@ RSpec.describe "view admin_application_forms/show.html.erb", type: :feature do
       application_pets_5 = ApplicationPet.create(pet: pet_2, application_form: applicationform_1)
       visit "/admin/applications/#{applicationform_1.id}"
 
-      expect(page).to have_content("ADMIN: Application for #{application_form_1.name}")
+      expect(page).to have_content("ADMIN: Application for #{applicationform_1.name}")
 
       within "#pet-#{pet_1.id}" do
         expect(page).to have_button("Approve This Pet For This Application")

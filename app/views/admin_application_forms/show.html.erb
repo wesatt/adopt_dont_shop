@@ -1,0 +1,13 @@
+<h1>ADMIN: Application for <%= @application_form.name %></h1>
+
+<h2>Pets on this Application:</h2>
+
+<% @pets.each do |pet| %>
+  <div id="pet-<%= pet.id %>">
+    <% #if pet.status_approved?(@application_form) %>
+      <p><strong><%= pet.name %></strong> APPROVED</p>
+    <% #else %>
+      <p><strong><%= pet.name %></strong> <%= button_to "Approve This Pet For This Application", { controller: :admin_application_forms, action: :approve_pet, pet_id: pet.id }, method: :patch %></p>
+    <% #end %>
+  </div>
+<% end %>
