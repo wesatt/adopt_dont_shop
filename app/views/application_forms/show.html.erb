@@ -10,10 +10,20 @@
 <br>
 
 <h3>Current pets:</h3>
-  <% @application_form.pets.each do |pet|%>
-    <p><strong><%= link_to "#{pet.name}", "/pets/#{pet.id}/" %></strong></p>
+  <div id="current-pets">
+    <% @application_form.pets.each do |pet|%>
+      <p><strong><%= link_to "#{pet.name}", "/pets/#{pet.id}/" %></strong></p>
+    <% end %>
+  </div>
+<br>
+
+<% if !@application_form.pets.empty? && @application_form.status == "In Progress" %>
+  <%= form_with url: "/application_forms/#{@application_form.id}/", method: :patch do |form| %>
+    <strong><%= form.label "Why would you be a good owner for your selected pet(s)?" %></strong>
+    <p><%= form.text_area :description %></p>
+    <p><%= form.submit "Submit Application" %></p>
   <% end %>
-  <br>
+<% end %>
 
 <% if @application_form.status == "In Progress" %>
   <h3>Add a Pet to this Application</h3>
@@ -24,8 +34,8 @@
   <% end %>
 <% end %>
 
-<% if params[:query] != nil %>
-  <% Pet.search_results(params[:query]).each do |pet| %>
-    <p><%= pet.name %></p>
+<% if params[:query] %>
+  <% Pet.search(params[:query]).each do |pet| %>
+    <p><strong><%= pet.name %></strong> <%= button_to "Adopt #{pet.name}", { controller: :application_forms, action: :add_pet, pet_id: pet.id }, method: :post %></p>
   <% end %>
 <% end %>
