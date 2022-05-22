@@ -4,10 +4,12 @@
 
 <% @pets.each do |pet| %>
   <div id="pet-<%= pet.id %>">
-    <% #if pet.status_approved?(@application_form) %>
+    <% if pet.application_status(@application_form) == "Approved" %>
       <p><strong><%= pet.name %></strong> APPROVED</p>
-    <% #else %>
-      <p><strong><%= pet.name %></strong> <%= button_to "Approve This Pet For This Application", { controller: :admin_application_forms, action: :approve_pet, pet_id: pet.id }, method: :patch %></p>
-    <% #end %>
+    <% elsif pet.application_status(@application_form) == "Rejected" %>
+      <p><strong><%= pet.name %></strong> REJECTED</p>
+    <% else %>
+      <p><strong><%= pet.name %></strong> <%= button_to "Approve This Pet For This Application", "/admin/application_forms/#{@application_form.id}", method: :patch, params: { status: "Approved", pet_id: pet.id } %></p>
+    <% end %>
   </div>
 <% end %>

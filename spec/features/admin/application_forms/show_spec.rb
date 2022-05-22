@@ -32,7 +32,7 @@ RSpec.describe "view admin_application_forms/show.html.erb", type: :feature do
     # And instead I see an indicator next to the pet that they have been approved
     it "has a button to approve a pet for a specific application" do
       application_pets_5 = ApplicationPet.create(pet: pet_2, application_form: applicationform_1)
-      visit "/admin/applications/#{applicationform_1.id}"
+      visit "/admin/application_forms/#{applicationform_1.id}"
 
       expect(page).to have_content("ADMIN: Application for #{applicationform_1.name}")
 
@@ -48,7 +48,7 @@ RSpec.describe "view admin_application_forms/show.html.erb", type: :feature do
         click_button "Approve This Pet For This Application"
       end
 
-      expect(current_path).to eq("/admin/applications/#{applicationform_1.id}")
+      expect(current_path).to eq("/admin/application_forms/#{applicationform_1.id}")
 
       within "#pet-#{pet_1.id}" do
         expect(page).to have_button("Approve This Pet For This Application")
