@@ -137,6 +137,10 @@ RSpec.describe ApplicationForm, type: :feature do
       expect(page).to have_content("Why would you be a good owner for your selected pet(s)?")
       expect(page).to have_content("Add a Pet to this Application")
 
+      click_button("Submit Application")
+
+      expect(page).to have_content("Error: Description cannot be blank.")
+
       fill_in(:description, with: "I'm gonna love this animal with all my heart!")
       click_button("Submit Application")
 

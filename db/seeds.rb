@@ -12,8 +12,9 @@ ApplicationForm.destroy_all
 VeterinaryOffice.destroy_all
 Veterinarian.destroy_all
 
-shelter_1 = Shelter.create(name: 'Aurora Shelter', city: 'Aurora, CO', foster_program: false, rank: 5)
-shelter_2 = Shelter.create(name: 'Mystery Building', city: 'Irvine CA', foster_program: true, rank: 9)
+shelter_1 = Shelter.create(name: 'Aurora Shelter', city: 'Aurora, CO', foster_program: true, rank: 9)
+shelter_2 = Shelter.create(name: 'Mystery Building', city: 'Irvine CA', foster_program: false, rank: 5)
+shelter_3 = Shelter.create(name: 'Best Friends', city: 'Mission Hills CA', foster_program: true, rank: 10)
 
 pet_1 = Pet.create(name: 'Scooby', age: 2, breed: 'Great Dane', adoptable: true, shelter_id: shelter_1.id)
 pet_2 = Pet.create(adoptable: true, age: 1, breed: 'sphynx', name: 'Lucille Bald', shelter_id: shelter_1.id)
