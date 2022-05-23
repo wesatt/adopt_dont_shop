@@ -36,7 +36,6 @@ RSpec.describe Shelter, type: :model do
         applicationform_1 = ApplicationForm.create(name: "Levi", street_address: "4321 Another Street", city: "Los Angeles", state: "CA", zip_code: "12345", description: "I would like an animal, please.", status: "Pending")
         application_pet_1 = ApplicationPet.create(pet: @pet_1, application_form: applicationform_1)
         expect(Shelter.shelters_with_pending_apps).to eq([@shelter_1])
-
       end
     end
 
