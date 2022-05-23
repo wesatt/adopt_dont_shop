@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'the admins shelter index' do
-  xit 'lists all the shelters in reverse alphabetical order' do
+  it 'lists all the shelters in reverse alphabetical order' do
     # Admin Shelters Index
     #
     # As a visitor
