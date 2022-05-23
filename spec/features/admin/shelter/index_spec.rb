@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'the admins shelter index' do
-  it 'lists all the shelters in reverse alphabetical order' do
+  xit 'lists all the shelters in reverse alphabetical order' do
     # Admin Shelters Index
     #
     # As a visitor
@@ -58,19 +58,28 @@ RSpec.describe 'the admins shelter index' do
     application_pets_3 = ApplicationPet.create(pet: pet_2, application_form: applicationform_1)
 
     visit "/admin/shelters"
-    # save_and_open_page
+    save_and_open_page
 
     expect(page).to have_content("Shelter's with Pending Applications:")
-    expect(page).to have_content("#{shelter_1.name} has pending applications")
-    expect(page).to have_content("#{shelter_2.name} has pending applications")
-    expect(page).to_not have_content("#{shelter_3.name} has pending applications")
+    # expect(page).to have_content("#{shelter_1.name} has pending applications")
+    # expect(page).to have_content("#{shelter_2.name} has pending applications")
+    # expect(page).to_not have_content("#{shelter_3.name} has pending applications")
+    # expect("Shelter's with Pending Applications:").to appear_before("Aurora Shelter has pending applications")
 
+    within "#pending-applications" do
+      expect(page).to have_content("Aurora Shelter")
+      expect(page).to have_content("Mystery Building")
+      expect(page).to_not have_content("Zaney Building")
+    end
 
     pet_4 = Pet.create(adoptable: true, age: 3, breed: 'doberman', name: 'Melvin', shelter_id: shelter_3.id)
     application_pets_4 = ApplicationPet.create(pet: pet_4, application_form: applicationform_2)
 
     visit "/admin/shelters"
-    expect(page).to have_content("#{shelter_3.name} has pending applications")
+    within "#pending-applications" do
+      expect(page).to have_content("Aurora Shelter")
+      expect(page).to have_content("Zaney Building")
+    end
 
   end
 end
