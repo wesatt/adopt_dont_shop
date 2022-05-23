@@ -120,6 +120,9 @@ RSpec.describe "view admin_application_forms/show.html.erb", type: :feature do
     # And instead I see buttons to approve or reject the pet for this specific application
     it "has a button to reject a pet for a specific application" do
       application_pets_5 = ApplicationPet.create(pet: pet_2, application_form: applicationform_1)
+      applicationform_6 = ApplicationForm.create(name: "Kevin", street_address: "3333 Oneother Court", city: "New York", state: "NY", zip_code: "54321", description: "I love animals.", status: "Pending")
+      application_pets_6 = ApplicationPet.create(pet: pet_1, application_form: applicationform_6)
+      application_pets_7 = ApplicationPet.create(pet: pet_2, application_form: applicationform_6)
 
       visit "/admin/application_forms/#{applicationform_1.id}"
       expect(page).to have_content("ADMIN: Application for #{applicationform_1.name}")
@@ -133,16 +136,11 @@ RSpec.describe "view admin_application_forms/show.html.erb", type: :feature do
         click_button "Reject This Pet For This Application"
       end
 
-      # save_and_open_page
-
-      applicationform_6 = ApplicationForm.create(name: "Kevin", street_address: "3333 Oneother Court", city: "New York", state: "NY", zip_code: "54321", description: "I love animals.", status: "Pending")
-
-      application_pets_6 = ApplicationPet.create(pet: pet_1, application_form: applicationform_6)
-      application_pets_7 = ApplicationPet.create(pet: pet_2, application_form: applicationform_6)
 
       visit "/admin/application_forms/#{applicationform_6.id}"
-      # save_and_open_page
+
       expect(current_path).to eq("/admin/application_forms/#{applicationform_6.id}")
+
       within "#pet-#{pet_1.id}" do
         expect(page).to have_button("Approve This Pet For This Application")
         expect(page).to have_button("Reject This Pet For This Application")
