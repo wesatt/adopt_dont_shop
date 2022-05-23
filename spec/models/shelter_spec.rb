@@ -24,6 +24,22 @@ RSpec.describe Shelter, type: :model do
   end
 
   describe 'class methods' do
+    describe '#name_desc' do
+      it 'returns shelters in desc order by name' do
+        expect(Shelter.name_desc).to eq([@shelter_2, @shelter_3, @shelter_1])
+      end
+    end
+
+    describe '#shelters_with_pending_apps' do
+      it 'returns shelters with pending applications' do
+        expect(Shelter.shelters_with_pending_apps).to eq([])
+        applicationform_1 = ApplicationForm.create(name: "Levi", street_address: "4321 Another Street", city: "Los Angeles", state: "CA", zip_code: "12345", description: "I would like an animal, please.", status: "Pending")
+        application_pet_1 = ApplicationPet.create(pet: @pet_1, application_form: applicationform_1)
+        expect(Shelter.shelters_with_pending_apps).to eq([@shelter_1])
+
+      end
+    end
+
     describe '#search' do
       it 'returns partial matches' do
         expect(Shelter.search("Fancy")).to eq([@shelter_3])
