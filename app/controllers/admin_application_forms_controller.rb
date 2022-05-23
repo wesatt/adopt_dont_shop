@@ -7,7 +7,11 @@ class AdminApplicationFormsController < ApplicationController
 
   def update
     application_pet = ApplicationPet.where(application_form_id: params[:id]).where(pet_id: params[:pet_id]).first
-    application_pet.update(status: "Approved")
+    if params[:status] == "Approved"
+      application_pet.update(status: "Approved")
+    else
+      application_pet.update(status: "Rejected")
+    end
     redirect_to "/admin/application_forms/#{params[:id]}"
   end
 end
