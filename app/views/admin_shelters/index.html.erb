@@ -8,7 +8,10 @@
 <% end %>
 
 <h1>Shelter's with Pending Applications:</h1>
+<div id="pending-applications">
+  
+  <% @shelters_with_pending_apps.each do |shelter| %>
+  <h3><%= shelter.name %> has pending applications</h3>
+  <% end %>
 
-<% @shelters_with_pending_apps.each do |shelter| %>
-    <h3><%= shelter.name %> has pending applications</h3>
-<% end %>
+</div>
