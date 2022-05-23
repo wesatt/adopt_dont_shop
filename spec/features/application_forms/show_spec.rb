@@ -171,6 +171,36 @@ RSpec.describe "Application_forms show page", type: :feature do
       end
     end
 
-    
+    describe "Partial Matches for Pet Names" do
+      it 'returns pets with partial matches' do
+        # As a visitor
+        # When I visit an application show page
+        # And I search for Pets by name
+        # Then I see any pet whose name PARTIALLY matches my search
+        # For example, if I search for "fluff", my search would match pets with names "fluffy", "fluff", and "mr. fluff"
+        visit "/application_forms/#{applicationform_5.id}/"
+        # save_and_open_page
+
+        fill_in(:query, with: "Lob")
+        click_button("Submit Search")
+        expect(page).to have_content("Lobster")
+        expect(page).to_not have_content("Lucille Bald")
+        expect(page).to_not have_content("Scooby")
+
+        fill_in(:query, with: "L")
+        click_button("Submit Search")
+        expect(page).to have_content("Lucille Bald")
+        expect(page).to have_content("Lobster")
+        expect(page).to_not have_content("Scooby")
+
+        fill_in(:query, with: "")
+        click_button("Submit Search")
+        expect(page).to have_content("Lucille Bald")
+        expect(page).to have_content("Lobster")
+        expect(page).to have_content("Scooby")
+      end
+    end
+
+
   end
 end
