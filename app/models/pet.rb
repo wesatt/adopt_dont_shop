@@ -12,4 +12,13 @@ class Pet < ApplicationRecord
   def self.adoptable
     where(adoptable: true)
   end
+
+  def application_status(application_form)
+    application_pet = ApplicationPet.where(application_form_id: application_form.id).where(pet_id: self.id).first
+    if application_pet
+      application_pet.status
+    else
+      nil
+    end
+  end
 end

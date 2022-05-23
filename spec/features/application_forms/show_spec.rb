@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ApplicationForm, type: :feature do
+RSpec.describe "Application_forms show page", type: :feature do
   let!(:shelter_1) { Shelter.create(name: 'Aurora Shelter', city: 'Aurora, CO', foster_program: false, rank: 5) }
   let!(:shelter_2) { Shelter.create(name: 'Mystery Building', city: 'Irvine CA', foster_program: true, rank: 9) }
 
