@@ -49,7 +49,7 @@ RSpec.describe "view admin_application_forms/show.html.erb", type: :feature do
       end
 
       expect(current_path).to eq("/admin/application_forms/#{applicationform_1.id}")
-      
+
       within "#pet-#{pet_1.id}" do
         expect(page).to have_button("Approve This Pet For This Application")
         expect(page).to_not have_content("APPROVED")
@@ -58,6 +58,54 @@ RSpec.describe "view admin_application_forms/show.html.erb", type: :feature do
       within "#pet-#{pet_2.id}" do
         expect(page).to_not have_button("Approve This Pet For This Application")
         expect(page).to have_content("APPROVED")
+      end
+    end
+
+  describe "Rejecting a Pet for Adoption" do
+    # As a visitor
+    # When I visit an admin application show page ('/admin/applications/:id')
+    # For every pet that the application is for, I see a button to reject the application for that specific pet
+    # When I click that button
+    # Then I'm taken back to the admin application show page
+    # And next to the pet that I rejected, I do not see a button to approve or reject this pet
+    # And instead I see an indicator next to the pet that they have been rejected
+      it "has a button to reject a pet for a specific application" do
+        application_pets_5 = ApplicationPet.create(pet: pet_2, application_form: applicationform_1)
+        visit "/admin/application_forms/#{applicationform_1.id}"
+
+        expect(page).to have_content("ADMIN: Application for #{applicationform_1.name}")
+
+        within "#pet-#{pet_1.id}" do
+          expect(page).to have_button("Approve This Pet For This Application")
+          expect(page).to have_button("Reject This Pet For This Application")
+          expect(page).to_not have_content("APPROVED")
+          expect(page).to_not have_content("REJECTED")
+        end
+
+        within "#pet-#{pet_2.id}" do
+          expect(page).to have_button("Approve This Pet For This Application")
+          expect(page).to have_button("Reject This Pet For This Application")
+          expect(page).to_not have_content("APPROVED")
+          expect(page).to_not have_content("REJECTED")
+
+          click_button "Reject This Pet For This Application"
+        end
+
+        expect(current_path).to eq("/admin/application_forms/#{applicationform_1.id}")
+
+        within "#pet-#{pet_1.id}" do
+          expect(page).to have_button("Approve This Pet For This Application")
+          expect(page).to have_button("Reject This Pet For This Application")
+          expect(page).to_not have_content("APPROVED")
+          expect(page).to_not have_content("REJECTED")
+        end
+
+        within "#pet-#{pet_2.id}" do
+          expect(page).to_not have_button("Approve This Pet For This Application")
+          expect(page).to_not have_button("Reject This Pet For This Application")
+          expect(page).to have_content("REJECTED")
+          expect(page).to_not have_content("APPROVED")
+        end
       end
     end
   end
