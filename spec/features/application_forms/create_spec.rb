@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ApplicationForm, type: :feature do
   describe "application create page" do
-    it "renders the new form" do
+    it "Starting an Application (form)" do
       # As a visitor
       # When I visit the pet index page
       # Then I see a link to "Start an Application"
@@ -58,7 +58,7 @@ RSpec.describe ApplicationForm, type: :feature do
 
     end
 
-    it 're-renders the new form' do
+    it 'Starting an Application (form), Form not completed' do
       # Starting an Application, Form not Completed
       #
       # As a visitor
@@ -84,5 +84,6 @@ RSpec.describe ApplicationForm, type: :feature do
       expect(page).to have_content("Error: Street address can't be blank, City can't be blank, State can't be blank, Zip code can't be blank, Zip code is not a number")
       expect(page).to have_current_path('/application_forms/new')
     end
+    
   end
 end

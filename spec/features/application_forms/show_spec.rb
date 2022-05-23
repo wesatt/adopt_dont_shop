@@ -153,5 +153,24 @@ RSpec.describe "Application_forms show page", type: :feature do
       expect(page).to_not have_content("Why would you be a good owner for your selected pet(s)?")
       expect(page).to_not have_content("Add a Pet to this Application")
     end
+
+    describe "No Pets on an Application" do
+      it 'does not let the user submit the application if there are no pets on the application' do
+        # As a visitor
+        # When I visit an application's show page
+        # And I have not added any pets to the application
+        # Then I do not see a section to submit my application
+        visit "/application_forms/#{applicationform_5.id}/"
+        expect(page).to_not have_button("Submit Application")
+
+        fill_in(:query, with: "Lobster")
+        click_button("Submit Search")
+        click_button("Adopt Lobster")
+
+        expect(page).to have_button("Submit Application")
+      end
+    end
+
+    
   end
 end
