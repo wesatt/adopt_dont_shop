@@ -18,20 +18,12 @@
 <br>
 
 <% if @application_form.can_be_submitted? %>
-  <%= form_with url: "/application_forms/#{@application_form.id}/", method: :patch do |form| %>
-    <strong><%= form.label "Why would you be a good owner for your selected pet(s)?" %></strong>
-    <p><%= form.text_area :description %></p>
-    <p><%= form.submit "Submit Application" %></p>
-  <% end %>
+  <%= render partial: "show_form", locals: {url: "/application_forms/#{@application_form.id}/", method: :patch, form_label: "Why would you be a good owner for your selected pet(s)?", text_field_type: :description, button_text: "Submit Application"} %>
 <% end %>
 
 <% if @application_form.in_progress? %>
   <h3>Add a Pet to this Application</h3>
-  <%= form_with url: "/application_forms/#{@application_form.id}/", method: :get do |form| %>
-    <%= form.label :query, "Search pets by name:" %>
-    <%= form.text_field :query %>
-    <%= form.submit "Submit Search" %>
-  <% end %>
+  <%= render partial: "show_form", locals: {url: "/application_forms/#{@application_form.id}/", method: :get, form_label: "Search pets by name:", text_field_type: :query, button_text: "Submit Search"} %>
 <% end %>
 
 <% if params[:query] %>
