@@ -422,3 +422,7 @@ Then next to each pet's name I see a link to the admin application show page whe
 ### Styling
 
 Implement a CSS Grid Framework to improve your styling, either [CSS Grid Layout](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout) or [Bootstrap](https://getbootstrap.com/)
+
+### DTR
+
+Our DTR can be found here: [DTR]([https://guides.rubyonrails.org/active_record_querying.html#scopes](https://docs.google.com/document/d/1-MjPLVV2QzmGZIkkao8AgvP5kW7kr0_mZekWBkrmk0E/edit?usp=sharing))
