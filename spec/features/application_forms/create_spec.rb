@@ -39,14 +39,7 @@ RSpec.describe ApplicationForm, type: :feature do
 
       click_button "Submit"
 
-      # binding.pry
-
-      #where does the post come in on the view?
       expect(current_path).to eq("/application_forms/#{ApplicationForm.last.id}")
-      #not sure about this path
-
-      # click_link "View Hank's Application"
-      # save_and_open_page
 
       expect(page).to have_content('Hank')
       expect(page).to have_content('1234 Some Street')
@@ -71,10 +64,6 @@ RSpec.describe ApplicationForm, type: :feature do
 
       click_button 'Submit'
 
-      # save_and_open_page
-
-      # fill_in 'City', with: 'Houston'
-
       expect(page).to have_content("Error: Name can't be blank, Street address can't be blank, City can't be blank, State can't be blank, Zip code can't be blank, Zip code is not a number")
       expect(page).to have_current_path('/application_forms/new')
 
@@ -84,6 +73,6 @@ RSpec.describe ApplicationForm, type: :feature do
       expect(page).to have_content("Error: Street address can't be blank, City can't be blank, State can't be blank, Zip code can't be blank, Zip code is not a number")
       expect(page).to have_current_path('/application_forms/new')
     end
-    
+
   end
 end

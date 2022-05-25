@@ -19,8 +19,9 @@ Rails.application.routes.draw do
   post '/application_forms', to: 'application_forms#create'
   get '/application_forms/new', to: 'application_forms#new'
   get '/application_forms/:id', to: 'application_forms#show'
-  post '/application_forms/:id', to: 'application_forms#add_pet'
   patch '/application_forms/:id', to: 'application_forms#update'
+
+  post '/application_forms/:id/pets', to: 'application_form_pets#create'
 
   get '/veterinary_offices', to: 'veterinary_offices#index'
   get '/veterinary_offices/new', to: 'veterinary_offices#new'
@@ -43,7 +44,7 @@ Rails.application.routes.draw do
   get '/veterinary_offices/:veterinary_office_id/veterinarians', to: 'veterinary_offices#veterinarians'
   get '/veterinary_offices/:veterinary_office_id/veterinarians/new', to: 'veterinarians#new'
   post '/veterinary_offices/:veterinary_office_id/veterinarians', to: 'veterinarians#create'
-   
+
   get '/admin/application_forms/:id', to: 'admin_application_forms#show'
   patch '/admin/application_forms/:id', to: 'admin_application_forms#update'
 

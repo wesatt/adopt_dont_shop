@@ -17,6 +17,5 @@ RSpec.describe 'the application form index' do
 
     click_link("View #{applicationform_1.name}'s Application")
     expect(current_path).to eq("/application_forms/#{applicationform_1.id}")
-    # save_and_open_page
   end
 end
