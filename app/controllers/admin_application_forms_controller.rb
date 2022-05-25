@@ -6,7 +6,7 @@ class AdminApplicationFormsController < ApplicationController
   end
 
   def update
-    application_pet = ApplicationPet.where(application_form_id: params[:id]).where(pet_id: params[:pet_id]).first
+    application_pet = ApplicationPet.where(application_form_id: params[:id], pet_id: params[:pet_id]).first
     if params[:status] == "Approved"
       application_pet.update(status: "Approved")
     else

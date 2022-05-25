@@ -9,27 +9,16 @@ class ApplicationFormsController < ApplicationController
   end
 
   def new
-    # redirect_to '.......'
   end
 
   def create
     application_form = ApplicationForm.new(application_form_params)
-    application_form.status = "In Progress"
-    if application_form.save
-      # redirect_to '/application_forms/#{application_form.id}'
+    if application_form.update(status: "In Progress")
       redirect_to "/application_forms/#{application_form.id}"
     else
-      # binding.pry
       redirect_to '/application_forms/new'
       flash[:alert] = "Error: #{error_message(application_form.errors)}"
     end
-
-    # if shelter.save
-    #   redirect_to '/shelters'
-    # else
-    #   redirect_to '/shelters/new'
-    #   flash[:alert] = "Error: #{error_message(shelter.errors)}"
-    # end
   end
 
   def update
@@ -41,11 +30,6 @@ class ApplicationFormsController < ApplicationController
       redirect_to "/application_forms/#{params[:id]}/"
       flash[:alert] = "Error: Description cannot be blank."
     end
-  end
-
-  def add_pet
-    ApplicationPet.create(application_form_id: params[:id], pet_id: params[:pet_id])
-    redirect_to "/application_forms/#{params[:id]}/"
   end
 
   private

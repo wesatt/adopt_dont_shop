@@ -17,7 +17,7 @@ RSpec.describe 'the admins shelter index' do
     shelter_3 = Shelter.create(name: 'Zaney Building', city: 'Chicago, IL', foster_program: true, rank: 2)
 
     visit "/admin/shelters"
-    # save_and_open_page
+
     expect(shelter_3.name).to appear_before(shelter_2.name)
     expect(shelter_2.name).to appear_before(shelter_1.name)
 
@@ -51,7 +51,6 @@ RSpec.describe 'the admins shelter index' do
     application_pets_3 = ApplicationPet.create(pet: pet_2, application_form: applicationform_1)
 
     visit "/admin/shelters"
-    # save_and_open_page
 
     expect(page).to have_content("Shelter's with Pending Applications:")
 
